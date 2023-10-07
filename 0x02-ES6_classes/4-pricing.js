@@ -23,7 +23,7 @@ export default class Pricing {
   }
 
   set currency(newCurrency) {
-    if (currency instanceof Currency) {
+    if (this._currency instanceof Currency) {
       this._currency = newCurrency;
     }
   }
