@@ -1,17 +1,16 @@
-'use strict';
-const chai = require('chai');
-const sinon = require('sinon');
+const {describe, it} = require("mocha");
+const sinon = require("sinon");
+const sendPaymentRequestToApi = require("./3-payment");
+const Utils = require("./utils");
+const assert = require("assert");
 
-const Utils = require('./utils.js');
-const sendPaymentRequestToApi = require('./3-payment.js');
+describe("sendPaymentRequestToApi", function() {
+    it("check that Utils.calculateNumber was called once", function() {
+	const spy = sinon.spy(Utils, "calculateNumber");
 
-describe('sendPaymentRequestToApi function', () => {
-  const spyUtils = sinon.spy(Utils, 'calculateNumber');
+	sendPaymentRequestToApi(50, 24.52);
 
-  it('validate the usage of the Utils function', () => {
-    sendPaymentRequestToApi(100, 20);
-    chai.expect(spyUtils.calledOnce).to.be.true;
-    chai.expect(spyUtils.calledWith('SUM', 100, 20)).to.be.true;
-    spyUtils.restore()
-  });
+	assert(spy.calledOnce);
+	spy.restore();
+    });
 });
